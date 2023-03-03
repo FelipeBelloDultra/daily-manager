@@ -1,3 +1,6 @@
+// Packages
+import { useState } from "react";
+
 // Components
 import { ParticipantItem, Modal } from "@/components";
 
@@ -6,7 +9,6 @@ import { useLocalStorage } from "@/hooks/use-local-storage";
 
 // Intefaces
 import { IParticipants } from "@/interfaces";
-import { useState } from "react";
 
 export const App = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);

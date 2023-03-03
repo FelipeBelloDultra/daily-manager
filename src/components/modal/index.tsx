@@ -34,17 +34,17 @@ const Modal = ({
         onClick={onClose}
       >
         <div
-          className="h-[500px] max-w-[600px] w-full bg-white"
+          className="h-[500px] max-w-[600px] w-full bg-white rounded-md border-2 shadow"
           onClick={(event) => event.stopPropagation()}
         >
-          <div className="border-b-2 flex items-center px-6 py-5 justify-between">
+          <div className="border-b-2 flex items-center px-6 py-8 justify-between">
             <p className="text-2xl font-medium">{title}</p>
 
             <button
               onClick={onClose}
               className="rounded border-2 text-blue-500 border-blue-500"
             >
-              <X size={40} />
+              <X size={30} />
             </button>
           </div>
 
