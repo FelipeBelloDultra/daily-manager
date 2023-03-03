@@ -1,5 +1,5 @@
 // Intefaces
-import { IParticipants } from "@/interfaces";
+import { IParticipants } from "~/interfaces";
 
 interface INewParticipantProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;

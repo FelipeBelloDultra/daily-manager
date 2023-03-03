@@ -2,10 +2,10 @@
 import { X } from "react-feather";
 
 // Interfaces
-import { IReactNode } from "@/interfaces";
+import { IReactNode } from "~/interfaces";
 
 // Components
-import { ReactPortal } from "@/components";
+import { ReactPortal } from "~/components";
 
 // Child components
 import NewParticipant from "./new-participant";

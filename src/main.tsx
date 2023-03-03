@@ -2,10 +2,10 @@
 import ReactDOM from "react-dom/client";
 
 // Components
-import { App } from "@/.";
+import { App } from "~/.";
 
 // Styles
-import "@/styles";
+import "~/styles";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <App />

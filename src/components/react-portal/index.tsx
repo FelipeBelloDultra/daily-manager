@@ -2,7 +2,7 @@
 import ReactDOM from "react-dom";
 
 // Interfaces
-import { IReactNode } from "@/interfaces";
+import { IReactNode } from "~/interfaces";
 
 interface IReactPortalProps {
   containerId?: string;

@@ -1,5 +1,5 @@
 // Interfaces
-import { IParticipants } from "@/interfaces";
+import { IParticipants } from "~/interfaces";
 
 interface IParticipantItemProps {
   participant: IParticipants;
