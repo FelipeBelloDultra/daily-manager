@@ -47,14 +47,15 @@ export const App = (): JSX.Element => {
       </header>
 
       <main className="flex flex-col gap-2 mt-5 pb-11">
-        {participants.length
-          ? participants.map((participant) => (
-              <ParticipantItem
-                key={participant._id}
-                participant={participant}
-              />
-            ))
-          : null}
+        {participants.length ? (
+          participants.map((participant) => (
+            <ParticipantItem key={participant._id} participant={participant} />
+          ))
+        ) : (
+          <p className="font-bold text-4xl mt-11 text-gray-500 text-center">
+            No information collected
+          </p>
+        )}
       </main>
 
       <Modal

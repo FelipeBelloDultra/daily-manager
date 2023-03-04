@@ -14,6 +14,11 @@ const NewParticipant = ({
       name: "John Doe",
       message: "EAASDASDASD",
       username: "New username",
+      createdAt: new Date().toLocaleString("pt-BR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }),
     });
   }
 

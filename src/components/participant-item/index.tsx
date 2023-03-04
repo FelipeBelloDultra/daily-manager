@@ -1,3 +1,6 @@
+// Packages
+import { useMemo } from "react";
+
 // Components
 import { ExpandedPanel } from "~/components";
 
@@ -23,6 +26,8 @@ const ParticipantItem = ({
             </span>
           ) : null}
         </span>
+
+        <span className="ml-auto">{participant.createdAt}</span>
       </ExpandedPanel.PanelHeader>
 
       <ExpandedPanel.PanelContent>

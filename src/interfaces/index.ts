@@ -6,6 +6,7 @@ export interface IParticipants {
   name: string;
   username?: string;
   message?: string;
+  createdAt: string;
 }
 
 /**
