@@ -28,12 +28,18 @@ const ParticipantItem = ({
       </ExpandedPanel.PanelHeader>
 
       <ExpandedPanel.PanelContent>
-        <span className="truncate">
+        <span className="flex flex-col space-y-3">
           {Object.keys(participant.message).length
             ? Object.entries(participant.message).map(([key, value], index) => (
-                <span key={`${participant._id}-${index}`}>
-                  {key}: {value}
-                </span>
+                <div
+                  key={`${participant._id}-${index}`}
+                  className="flex items-end"
+                >
+                  <span className="uppercase font-bold text-blue-900 mr-2 text-sm">
+                    {key}:
+                  </span>{" "}
+                  <p className="truncate text-gray-900 font-medium">{value}</p>
+                </div>
               ))
             : null}
         </span>
