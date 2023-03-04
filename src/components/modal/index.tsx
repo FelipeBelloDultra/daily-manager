@@ -42,7 +42,7 @@ const Modal = ({
 
             <button
               onClick={onClose}
-              className="rounded border-2 text-blue-500 border-blue-500"
+              className="rounded-md border-2 text-blue-500 border-blue-500 hover:opacity-75"
             >
               <X size={30} />
             </button>

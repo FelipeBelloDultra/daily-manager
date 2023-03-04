@@ -11,4 +11,8 @@ export interface IParticipants {
 /**
  * GLOBAL INTERFACES
  */
-export type { ReactNode as IReactNode } from "react";
+export type {
+  ReactNode as IReactNode,
+  HTMLAttributes as IHTMLAttributes,
+  ButtonHTMLAttributes as IButtonHTMLAttributes,
+} from "react";
