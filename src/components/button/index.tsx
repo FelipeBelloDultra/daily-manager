@@ -13,7 +13,7 @@ const Button = ({
   isDisabled = false,
   children,
   ...rest
-}: IButtonProps) => {
+}: IButtonProps): JSX.Element => {
   const buttonClasses =
     variant === "primary"
       ? "border-blue-600 bg-blue-600 hover:bg-blue-600/75"

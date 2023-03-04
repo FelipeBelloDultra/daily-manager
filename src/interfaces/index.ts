@@ -15,4 +15,5 @@ export type {
   ReactNode as IReactNode,
   HTMLAttributes as IHTMLAttributes,
   ButtonHTMLAttributes as IButtonHTMLAttributes,
+  ReactElement as IReactElement,
 } from "react";
