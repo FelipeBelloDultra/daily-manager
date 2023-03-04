@@ -1,6 +1,3 @@
-// Packages
-import { useMemo } from "react";
-
 // Components
 import { ExpandedPanel } from "~/components";
 
