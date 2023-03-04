@@ -10,6 +10,9 @@ import { useLocalStorage } from "~/hooks/use-local-storage";
 // Intefaces
 import { IParticipants } from "~/interfaces";
 
+// Utils
+import { DownloadFile } from "~/utils/download-file";
+
 export const App = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
 
@@ -20,6 +23,21 @@ export const App = (): JSX.Element => {
 
   function handleOpenNewParticipantModal(participantData: IParticipants) {
     setParticipants([...participants, participantData]);
+  }
+
+  function handleDownloadFile() {
+    const date = new Date();
+
+    const fileName = `daily-${date.getDate()}-${
+      date.getMonth() + 1
+    }-${date.getFullYear()}-${date.getTime()}`;
+
+    const downloadFile = new DownloadFile(fileName);
+
+    downloadFile.downloadJSON({
+      date: date,
+      data: participants,
+    });
   }
 
   return (
@@ -34,7 +52,7 @@ export const App = (): JSX.Element => {
             <Button onClick={() => setShowModal(true)}>Show modal</Button>
           </div>
 
-          <div className="w-[120px] self-end">
+          <div className="w-[200px] self-end">
             <Button
               variant="secondary"
               onClick={() => setParticipants([])}
@@ -57,6 +75,12 @@ export const App = (): JSX.Element => {
           </p>
         )}
       </main>
+
+      {participants.length ? (
+        <div className="w-[200px] fixed right-[30px] bottom-[30px]">
+          <Button onClick={handleDownloadFile}>Download Daily</Button>
+        </div>
+      ) : null}
 
       <Modal
         isVisible={showModal}
