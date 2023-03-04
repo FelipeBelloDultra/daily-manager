@@ -31,7 +31,15 @@ const ParticipantItem = ({
       </ExpandedPanel.PanelHeader>
 
       <ExpandedPanel.PanelContent>
-        <span className="truncate">{participant.message}</span>
+        <span className="truncate">
+          {Object.keys(participant.message).length
+            ? Object.entries(participant.message).map(([key, value], index) => (
+                <span key={`${participant._id}-${index}`}>
+                  {key}: {value}
+                </span>
+              ))
+            : null}
+        </span>
       </ExpandedPanel.PanelContent>
     </ExpandedPanel>
   );

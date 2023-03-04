@@ -5,7 +5,12 @@ export interface IParticipants {
   _id: string;
   name: string;
   username?: string;
-  message?: string;
+  message: {
+    doing: string;
+    done: string;
+    dificulties?: string;
+    others?: string;
+  };
   createdAt: string;
 }
 

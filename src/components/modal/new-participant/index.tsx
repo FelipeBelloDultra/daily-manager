@@ -12,7 +12,12 @@ const NewParticipant = ({
     onUpdateParticipants({
       _id: crypto.randomUUID(),
       name: "John Doe",
-      message: "EAASDASDASD",
+      message: {
+        doing: "DOING something",
+        done: "DONE something",
+        dificulties: "Nothing no",
+        others: "",
+      },
       username: "New username",
       createdAt: new Date().toLocaleString("pt-BR", {
         year: "numeric",
