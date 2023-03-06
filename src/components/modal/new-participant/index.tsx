@@ -1,5 +1,11 @@
+// Packages
+import { Mail } from "react-feather";
+
 // Intefaces
 import { IParticipants } from "~/interfaces";
+
+// Components
+import { Input, Button } from "~/components";
 
 interface INewParticipantProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;
@@ -28,8 +34,10 @@ const NewParticipant = ({
   }
 
   return (
-    <div className="flex flex-col">
-      <button onClick={handleUpdateParticipants}> Add new participant</button>
+    <div className="flex flex-col space-y-3">
+      <Button onClick={handleUpdateParticipants}> Add new participant</Button>
+
+      <Input name="email" />
     </div>
   );
 };

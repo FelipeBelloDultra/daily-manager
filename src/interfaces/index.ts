@@ -21,5 +21,8 @@ export type {
   ReactNode as IReactNode,
   HTMLAttributes as IHTMLAttributes,
   ButtonHTMLAttributes as IButtonHTMLAttributes,
+  InputHTMLAttributes as IInputHTMLAttributes,
   ReactElement as IReactElement,
 } from "react";
+
+export type { Icon as IIconProps } from "react-feather";
