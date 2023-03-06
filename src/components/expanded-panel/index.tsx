@@ -1,7 +1,7 @@
 // Packages
 import { useState, Children } from "react";
 
-// Child components
+// Components
 import PanelHeader from "./panel-header";
 import PanelContent from "./panel-content";
 
