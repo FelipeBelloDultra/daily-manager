@@ -24,7 +24,7 @@ const Button = ({
       {...rest}
       disabled={isDisabled}
       type={type}
-      className={`w-full h-10 rounded-md border-2  font-bold transition-colors shadow text-white ${buttonClasses} ${
+      className={`w-full h-10 rounded-md border-2 font-bold transition-colors shadow text-white ${buttonClasses} ${
         isDisabled ? "opacity-60 cursor-not-allowed" : ""
       }`}
     >

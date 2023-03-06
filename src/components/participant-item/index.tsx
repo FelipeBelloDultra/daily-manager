@@ -1,3 +1,6 @@
+// Packages
+import { Trash } from "react-feather";
+
 // Components
 import { ExpandedPanel } from "~/components";
 
@@ -6,10 +9,12 @@ import { IParticipants } from "~/interfaces";
 
 interface IParticipantItemProps {
   participant: IParticipants;
+  onRemoveParticipant: (participantId: string) => void;
 }
 
 const ParticipantItem = ({
   participant,
+  onRemoveParticipant,
 }: IParticipantItemProps): JSX.Element => {
   return (
     <ExpandedPanel>
@@ -24,7 +29,16 @@ const ParticipantItem = ({
           ) : null}
         </span>
 
-        <span className="ml-auto">{participant.createdAt}</span>
+        <span className="ml-auto inline-flex items-center gap-3">
+          {participant.createdAt}
+
+          <button
+            className="p-[5px] rounded-md bg-red-50 border border-red-200"
+            onClick={() => onRemoveParticipant(participant._id)}
+          >
+            <Trash className="text-red-700" />
+          </button>
+        </span>
       </ExpandedPanel.PanelHeader>
 
       <ExpandedPanel.PanelContent>

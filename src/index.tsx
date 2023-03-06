@@ -25,6 +25,12 @@ export const App = (): JSX.Element => {
     setParticipants([...participants, participantData]);
   }
 
+  function handleRemoveParticipantById(id: string) {
+    setParticipants(
+      participants.filter((participant) => participant._id !== id)
+    );
+  }
+
   function handleDownloadFile() {
     const date = new Date();
 
@@ -67,7 +73,11 @@ export const App = (): JSX.Element => {
       <main className="flex flex-col gap-2 mt-5 pb-11">
         {participants.length ? (
           participants.map((participant) => (
-            <ParticipantItem key={participant._id} participant={participant} />
+            <ParticipantItem
+              key={participant._id}
+              participant={participant}
+              onRemoveParticipant={handleRemoveParticipantById}
+            />
           ))
         ) : (
           <p className="font-bold text-4xl mt-11 text-gray-500 text-center">
@@ -89,7 +99,7 @@ export const App = (): JSX.Element => {
         modalName="new-participant-modal"
       >
         <Modal.NewParticipant
-          onUpdateParticipants={(data) => handleOpenNewParticipantModal(data)}
+          onUpdateParticipants={handleOpenNewParticipantModal}
         />
       </Modal>
     </div>
