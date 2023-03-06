@@ -1,5 +1,5 @@
 // Packages
-import { Mail } from "react-feather";
+import { useEffect, useRef } from "react";
 
 // Intefaces
 import { IParticipants } from "~/interfaces";
@@ -14,6 +14,12 @@ interface INewParticipantProps {
 const NewParticipant = ({
   onUpdateParticipants,
 }: INewParticipantProps): JSX.Element => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   function handleUpdateParticipants() {
     onUpdateParticipants({
       _id: crypto.randomUUID(),
@@ -37,7 +43,7 @@ const NewParticipant = ({
     <div className="flex flex-col space-y-3">
       <Button onClick={handleUpdateParticipants}> Add new participant</Button>
 
-      <Input name="email" />
+      <Input ref={inputRef} name="email" />
     </div>
   );
 };
