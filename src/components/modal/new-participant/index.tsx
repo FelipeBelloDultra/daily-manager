@@ -1,11 +1,11 @@
 // Packages
-import { useEffect, useRef, FormEvent } from "react";
+import { useEffect, useRef, FormEvent, useState } from "react";
 
 // Intefaces
 import { IParticipants } from "~/interfaces";
 
 // Components
-import { Forms, Button } from "~/components";
+import { Forms, Button, Steps } from "~/components";
 
 interface INewParticipantProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;
@@ -14,6 +14,13 @@ interface INewParticipantProps {
 const NewParticipant = ({
   onUpdateParticipants,
 }: INewParticipantProps): JSX.Element => {
+  const [inputs, setInputs] = useState({
+    doing: "",
+    done: "",
+    dificulties: "",
+    others: "",
+  });
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -22,6 +29,8 @@ const NewParticipant = ({
 
   function handleUpdateParticipants(event: FormEvent) {
     event.preventDefault();
+
+    console.log(inputs);
 
     onUpdateParticipants({
       _id: crypto.randomUUID(),
@@ -56,21 +65,54 @@ const NewParticipant = ({
         </Forms.InputGroup>
       </div>
 
-      <Forms.InputGroup labelFor="doing" label="Doing">
-        <Forms.Input name="doing" />
-      </Forms.InputGroup>
+      <Steps
+        stepsItem={4}
+        stepsTitle={["Doing", "Done", "Dificulties", "Others"]}
+        stepsContent={[
+          <Forms.InputGroup labelFor="doing" label="Doing">
+            <Forms.Input
+              name="doing"
+              value={inputs.doing}
+              onChange={(event) =>
+                setInputs((prev) => ({ ...prev, doing: event.target.value }))
+              }
+            />
+          </Forms.InputGroup>,
 
-      <Forms.InputGroup labelFor="done" label="Done">
-        <Forms.Input name="done" />
-      </Forms.InputGroup>
+          <Forms.InputGroup labelFor="done" label="Done">
+            <Forms.Input
+              name="done"
+              value={inputs.done}
+              onChange={(event) =>
+                setInputs((prev) => ({ ...prev, done: event.target.value }))
+              }
+            />
+          </Forms.InputGroup>,
 
-      <Forms.InputGroup labelFor="dificulties" label="Dificulties">
-        <Forms.Input name="dificulties" />
-      </Forms.InputGroup>
+          <Forms.InputGroup labelFor="dificulties" label="Dificulties">
+            <Forms.Input
+              name="dificulties"
+              value={inputs.dificulties}
+              onChange={(event) =>
+                setInputs((prev) => ({
+                  ...prev,
+                  dificulties: event.target.value,
+                }))
+              }
+            />
+          </Forms.InputGroup>,
 
-      <Forms.InputGroup labelFor="others" label="Others">
-        <Forms.Input name="others" />
-      </Forms.InputGroup>
+          <Forms.InputGroup labelFor="others" label="Others">
+            <Forms.Input
+              name="others"
+              value={inputs.others}
+              onChange={(event) =>
+                setInputs((prev) => ({ ...prev, others: event.target.value }))
+              }
+            />
+          </Forms.InputGroup>,
+        ]}
+      />
 
       <div className="max-w-[400px]">
         <Button type="submit">Add new participant</Button>
