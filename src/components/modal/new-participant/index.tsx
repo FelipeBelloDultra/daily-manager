@@ -1,5 +1,5 @@
 // Packages
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FormEvent } from "react";
 
 // Intefaces
 import { IParticipants } from "~/interfaces";
@@ -20,7 +20,9 @@ const NewParticipant = ({
     inputRef.current?.focus();
   }, []);
 
-  function handleUpdateParticipants() {
+  function handleUpdateParticipants(event: FormEvent) {
+    event.preventDefault();
+
     onUpdateParticipants({
       _id: crypto.randomUUID(),
       name: "John Doe",
@@ -40,11 +42,40 @@ const NewParticipant = ({
   }
 
   return (
-    <div className="flex flex-col space-y-3">
-      <Button onClick={handleUpdateParticipants}> Add new participant</Button>
+    <form
+      className="flex flex-col space-y-4"
+      onSubmit={handleUpdateParticipants}
+    >
+      <div className="flex gap-4">
+        <Forms.InputGroup labelFor="name" label="Full name">
+          <Forms.Input ref={inputRef} name="name" />
+        </Forms.InputGroup>
 
-      <Forms.Input ref={inputRef} name="email" />
-    </div>
+        <Forms.InputGroup labelFor="username" label="Username">
+          <Forms.Input name="username" />
+        </Forms.InputGroup>
+      </div>
+
+      <Forms.InputGroup labelFor="doing" label="Doing">
+        <Forms.Input name="doing" />
+      </Forms.InputGroup>
+
+      <Forms.InputGroup labelFor="done" label="Done">
+        <Forms.Input name="done" />
+      </Forms.InputGroup>
+
+      <Forms.InputGroup labelFor="dificulties" label="Dificulties">
+        <Forms.Input name="dificulties" />
+      </Forms.InputGroup>
+
+      <Forms.InputGroup labelFor="others" label="Others">
+        <Forms.Input name="others" />
+      </Forms.InputGroup>
+
+      <div className="max-w-[400px]">
+        <Button type="submit">Add new participant</Button>
+      </div>
+    </form>
   );
 };
 

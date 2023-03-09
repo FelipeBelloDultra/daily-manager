@@ -34,6 +34,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
         <input
           ref={ref}
           name={name}
+          id={name}
           type={type}
           className={INPUT_CLASSES}
           {...rest}
