@@ -1,11 +1,20 @@
 // Packages
-import { useEffect, useRef, FormEvent, useState } from "react";
+import { useForm } from "react-hook-form";
 
 // Intefaces
 import { IParticipants } from "~/interfaces";
 
 // Components
 import { Forms, Button, Steps } from "~/components";
+
+interface IInputFields {
+  name: string;
+  username: string;
+  doing: string;
+  done: string;
+  dificulties: string;
+  others: string;
+}
 
 interface INewParticipantProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;
@@ -14,34 +23,21 @@ interface INewParticipantProps {
 const NewParticipant = ({
   onUpdateParticipants,
 }: INewParticipantProps): JSX.Element => {
-  const [inputs, setInputs] = useState({
-    doing: "",
-    done: "",
-    dificulties: "",
-    others: "",
-  });
+  const { register, handleSubmit } = useForm<IInputFields>();
 
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  function handleUpdateParticipants(event: FormEvent) {
-    event.preventDefault();
-
-    console.log(inputs);
+  function handleUpdateParticipants(data: IInputFields) {
+    console.log(data);
 
     onUpdateParticipants({
       _id: crypto.randomUUID(),
-      name: "John Doe",
+      name: data.name,
       message: {
-        doing: "DOING something",
-        done: "DONE something",
-        dificulties: "Nothing no",
-        others: "",
+        doing: data.doing,
+        done: data.done,
+        dificulties: data.dificulties,
+        others: data.others,
       },
-      username: "New username",
+      username: data.username,
       createdAt: new Date().toLocaleString("pt-BR", {
         year: "numeric",
         month: "2-digit",
@@ -53,15 +49,15 @@ const NewParticipant = ({
   return (
     <form
       className="flex flex-col space-y-4"
-      onSubmit={handleUpdateParticipants}
+      onSubmit={handleSubmit(handleUpdateParticipants)}
     >
       <div className="flex gap-4">
         <Forms.InputGroup labelFor="name" label="Full name">
-          <Forms.Input ref={inputRef} name="name" />
+          <Forms.Input {...register("name")} />
         </Forms.InputGroup>
 
         <Forms.InputGroup labelFor="username" label="Username">
-          <Forms.Input name="username" />
+          <Forms.Input {...register("username")} />
         </Forms.InputGroup>
       </div>
 
@@ -70,46 +66,19 @@ const NewParticipant = ({
         stepsTitle={["Doing", "Done", "Dificulties", "Others"]}
         stepsContent={[
           <Forms.InputGroup labelFor="doing" label="Doing">
-            <Forms.Input
-              name="doing"
-              value={inputs.doing}
-              onChange={(event) =>
-                setInputs((prev) => ({ ...prev, doing: event.target.value }))
-              }
-            />
+            <Forms.Input {...register("doing")} />
           </Forms.InputGroup>,
 
           <Forms.InputGroup labelFor="done" label="Done">
-            <Forms.Input
-              name="done"
-              value={inputs.done}
-              onChange={(event) =>
-                setInputs((prev) => ({ ...prev, done: event.target.value }))
-              }
-            />
+            <Forms.Input {...register("done")} />
           </Forms.InputGroup>,
 
           <Forms.InputGroup labelFor="dificulties" label="Dificulties">
-            <Forms.Input
-              name="dificulties"
-              value={inputs.dificulties}
-              onChange={(event) =>
-                setInputs((prev) => ({
-                  ...prev,
-                  dificulties: event.target.value,
-                }))
-              }
-            />
+            <Forms.Input {...register("dificulties")} />
           </Forms.InputGroup>,
 
           <Forms.InputGroup labelFor="others" label="Others">
-            <Forms.Input
-              name="others"
-              value={inputs.others}
-              onChange={(event) =>
-                setInputs((prev) => ({ ...prev, others: event.target.value }))
-              }
-            />
+            <Forms.Input {...register("others")} />
           </Forms.InputGroup>,
         ]}
       />
