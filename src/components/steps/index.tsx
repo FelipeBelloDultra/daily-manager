@@ -40,7 +40,16 @@ const Steps = ({
         ))}
       </div>
 
-      <div className="px-5 pt-5">{stepsContent[activeStepIndex]}</div>
+      <div className="px-5 pt-5">
+        {stepsContent.map((content, index) => (
+          <span
+            key={`content-${index}`}
+            className={`${activeStepIndex !== index ? "hidden" : "block"}`}
+          >
+            {content}
+          </span>
+        ))}
+      </div>
     </div>
   );
 };

@@ -26,8 +26,6 @@ const NewParticipant = ({
   const { register, handleSubmit } = useForm<IInputFields>();
 
   function handleUpdateParticipants(data: IInputFields) {
-    console.log(data);
-
     onUpdateParticipants({
       _id: crypto.randomUUID(),
       name: data.name,
