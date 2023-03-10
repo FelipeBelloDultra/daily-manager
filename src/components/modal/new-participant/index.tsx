@@ -21,6 +21,7 @@ interface IInputFields {
 
 interface INewParticipantProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;
+  onClose: () => void;
 }
 
 const schema = yup.object().shape({
@@ -34,6 +35,7 @@ const schema = yup.object().shape({
 
 const NewParticipant = ({
   onUpdateParticipants,
+  onClose,
 }: INewParticipantProps): JSX.Element => {
   const {
     register,
@@ -80,6 +82,8 @@ const NewParticipant = ({
         day: "2-digit",
       }),
     });
+
+    onClose();
   }
 
   return (

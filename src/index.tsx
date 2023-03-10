@@ -105,6 +105,7 @@ export const App = (): JSX.Element => {
         modalName="new-participant-modal"
       >
         <Modal.NewParticipant
+          onClose={() => setShowModal(false)}
           onUpdateParticipants={handleOpenNewParticipantModal}
         />
       </Modal>
