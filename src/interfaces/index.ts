@@ -4,7 +4,7 @@
 export interface IParticipants {
   _id: string;
   name: string;
-  username?: string;
+  email?: string;
   message: {
     doing: string;
     done: string;

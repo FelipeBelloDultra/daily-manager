@@ -12,7 +12,7 @@ import { Forms, Button, Steps } from "~/components";
 
 interface IInputFields {
   name: string;
-  username: string;
+  email: string;
   doing: string;
   done: string;
   dificulties: string;
@@ -26,7 +26,7 @@ interface INewParticipantProps {
 
 const schema = yup.object().shape({
   name: yup.string().required().min(5),
-  username: yup.string().required().min(5),
+  email: yup.string().email().required(),
   doing: yup.string().required(),
   done: yup.string().required(),
   dificulties: yup.string(),
@@ -75,7 +75,7 @@ const NewParticipant = ({
         dificulties: data.dificulties,
         others: data.others,
       },
-      username: data.username,
+      email: data.email,
       createdAt: new Date().toLocaleString("pt-BR", {
         year: "numeric",
         month: "2-digit",
@@ -104,13 +104,13 @@ const NewParticipant = ({
         </Forms.InputGroup>
 
         <Forms.InputGroup
-          labelFor="username"
-          label="Username"
-          error={errors.username?.message}
+          labelFor="email"
+          label="Email"
+          error={errors.email?.message}
         >
           <Forms.Input
-            hasError={!!errors.username?.message}
-            {...register("username")}
+            hasError={!!errors.email?.message}
+            {...register("email")}
           />
         </Forms.InputGroup>
       </div>

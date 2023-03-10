@@ -22,9 +22,9 @@ const ParticipantItem = ({
         <span className="w-[185px]">
           <p className="text-lg truncate font-bold">{participant.name}</p>
 
-          {!!participant.username ? (
+          {!!participant.email ? (
             <span className="inline-block mt-[3px] text-xs truncate font-medium text-gray-500">
-              {participant.username}
+              {participant.email}
             </span>
           ) : null}
         </span>
