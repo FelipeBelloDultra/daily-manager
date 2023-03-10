@@ -6,6 +6,7 @@ import { IParticipants } from "~/interfaces";
 
 // Components
 import { Forms, Button, Steps } from "~/components";
+import { useEffect } from "react";
 
 interface IInputFields {
   name: string;
@@ -23,7 +24,17 @@ interface INewParticipantProps {
 const NewParticipant = ({
   onUpdateParticipants,
 }: INewParticipantProps): JSX.Element => {
-  const { register, handleSubmit } = useForm<IInputFields>();
+  const { register, handleSubmit, setFocus } = useForm<IInputFields>();
+
+  useEffect(() => {
+    setFocus("name");
+  }, []);
+
+  function handleSelectInputStep(selectedItem: string) {
+    setTimeout(() => {
+      setFocus(selectedItem as keyof IInputFields);
+    }, 100);
+  }
 
   function handleUpdateParticipants(data: IInputFields) {
     onUpdateParticipants({
@@ -59,27 +70,47 @@ const NewParticipant = ({
         </Forms.InputGroup>
       </div>
 
-      <Steps
-        stepsItem={4}
-        stepsTitle={["Doing", "Done", "Dificulties", "Others"]}
-        stepsContent={[
-          <Forms.InputGroup labelFor="doing" label="Doing">
-            <Forms.Input {...register("doing")} />
-          </Forms.InputGroup>,
-
-          <Forms.InputGroup labelFor="done" label="Done">
-            <Forms.Input {...register("done")} />
-          </Forms.InputGroup>,
-
-          <Forms.InputGroup labelFor="dificulties" label="Dificulties">
-            <Forms.Input {...register("dificulties")} />
-          </Forms.InputGroup>,
-
-          <Forms.InputGroup labelFor="others" label="Others">
-            <Forms.Input {...register("others")} />
-          </Forms.InputGroup>,
-        ]}
-      />
+      <span>
+        <Steps
+          stepsItem={4}
+          stepsTitle={["Doing", "Done", "Dificulties", "Others"]}
+          onChangeItem={handleSelectInputStep}
+          stepsContent={[
+            {
+              fieldName: "doing",
+              content: (
+                <Forms.InputGroup labelFor="doing" label="Doing">
+                  <Forms.Input {...register("doing")} />
+                </Forms.InputGroup>
+              ),
+            },
+            {
+              fieldName: "done",
+              content: (
+                <Forms.InputGroup labelFor="done" label="Done">
+                  <Forms.Input {...register("done")} />
+                </Forms.InputGroup>
+              ),
+            },
+            {
+              fieldName: "dificulties",
+              content: (
+                <Forms.InputGroup labelFor="dificulties" label="Dificulties">
+                  <Forms.Input {...register("dificulties")} />
+                </Forms.InputGroup>
+              ),
+            },
+            {
+              fieldName: "others",
+              content: (
+                <Forms.InputGroup labelFor="others" label="Others">
+                  <Forms.Input {...register("others")} />
+                </Forms.InputGroup>
+              ),
+            },
+          ]}
+        />
+      </span>
 
       <div className="max-w-[400px]">
         <Button type="submit">Add new participant</Button>
