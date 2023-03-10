@@ -1,5 +1,5 @@
 // Packages
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 // Components
 import { ParticipantItem, Modal, Button } from "~/components";
@@ -21,15 +21,21 @@ export const App = (): JSX.Element => {
     [] as IParticipants[]
   );
 
-  function handleOpenNewParticipantModal(participantData: IParticipants) {
-    setParticipants([...participants, participantData]);
-  }
+  const handleOpenNewParticipantModal = useCallback(
+    (participantData: IParticipants) => {
+      setParticipants([...participants, participantData]);
+    },
+    [participants]
+  );
 
-  function handleRemoveParticipantById(id: string) {
-    setParticipants(
-      participants.filter((participant) => participant._id !== id)
-    );
-  }
+  const handleRemoveParticipantById = useCallback(
+    (id: string) => {
+      setParticipants(
+        participants.filter((participant) => participant._id !== id)
+      );
+    },
+    [participants]
+  );
 
   function handleDownloadFile() {
     const date = new Date();
