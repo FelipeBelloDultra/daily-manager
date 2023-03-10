@@ -1,12 +1,14 @@
 // Packages
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 // Intefaces
 import { IParticipants } from "~/interfaces";
 
 // Components
 import { Forms, Button, Steps } from "~/components";
-import { useEffect } from "react";
 
 interface IInputFields {
   name: string;
@@ -21,14 +23,39 @@ interface INewParticipantProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;
 }
 
+const schema = yup.object().shape({
+  name: yup.string().required().min(5),
+  username: yup.string().required().min(5),
+  doing: yup.string().required(),
+  done: yup.string().required(),
+  dificulties: yup.string(),
+  others: yup.string(),
+});
+
 const NewParticipant = ({
   onUpdateParticipants,
 }: INewParticipantProps): JSX.Element => {
-  const { register, handleSubmit, setFocus } = useForm<IInputFields>();
+  const {
+    register,
+    handleSubmit,
+    setFocus,
+    formState: { errors },
+  } = useForm<IInputFields>({
+    resolver: yupResolver(schema),
+  });
 
   useEffect(() => {
     setFocus("name");
   }, []);
+
+  const stepFormHasError = useMemo(() => {
+    return (
+      !!errors.doing?.message ||
+      !!errors.done?.message ||
+      !!errors.dificulties?.message ||
+      !!errors.others?.message
+    );
+  }, [errors]);
 
   function handleSelectInputStep(selectedItem: string) {
     setTimeout(() => {
@@ -61,17 +88,32 @@ const NewParticipant = ({
       onSubmit={handleSubmit(handleUpdateParticipants)}
     >
       <div className="flex gap-4">
-        <Forms.InputGroup labelFor="name" label="Full name">
-          <Forms.Input {...register("name")} />
+        <Forms.InputGroup
+          labelFor="name"
+          label="Full name"
+          error={errors.name?.message}
+        >
+          <Forms.Input
+            hasError={!!errors.name?.message}
+            {...register("name")}
+          />
         </Forms.InputGroup>
 
-        <Forms.InputGroup labelFor="username" label="Username">
-          <Forms.Input {...register("username")} />
+        <Forms.InputGroup
+          labelFor="username"
+          label="Username"
+          error={errors.username?.message}
+        >
+          <Forms.Input
+            hasError={!!errors.username?.message}
+            {...register("username")}
+          />
         </Forms.InputGroup>
       </div>
 
       <span>
         <Steps
+          error={stepFormHasError ? "Please check all fields" : ""}
           stepsItem={4}
           stepsTitle={["Doing", "Done", "Dificulties", "Others"]}
           onChangeItem={handleSelectInputStep}
@@ -79,32 +121,60 @@ const NewParticipant = ({
             {
               fieldName: "doing",
               content: (
-                <Forms.InputGroup labelFor="doing" label="Doing">
-                  <Forms.Input {...register("doing")} />
+                <Forms.InputGroup
+                  labelFor="doing"
+                  label="Doing"
+                  error={errors.doing?.message}
+                >
+                  <Forms.Input
+                    hasError={stepFormHasError}
+                    {...register("doing")}
+                  />
                 </Forms.InputGroup>
               ),
             },
             {
               fieldName: "done",
               content: (
-                <Forms.InputGroup labelFor="done" label="Done">
-                  <Forms.Input {...register("done")} />
+                <Forms.InputGroup
+                  labelFor="done"
+                  label="Done"
+                  error={errors.doing?.message}
+                >
+                  <Forms.Input
+                    hasError={stepFormHasError}
+                    {...register("done")}
+                  />
                 </Forms.InputGroup>
               ),
             },
             {
               fieldName: "dificulties",
               content: (
-                <Forms.InputGroup labelFor="dificulties" label="Dificulties">
-                  <Forms.Input {...register("dificulties")} />
+                <Forms.InputGroup
+                  labelFor="dificulties"
+                  label="Dificulties"
+                  error={errors.dificulties?.message}
+                >
+                  <Forms.Input
+                    hasError={stepFormHasError}
+                    {...register("dificulties")}
+                  />
                 </Forms.InputGroup>
               ),
             },
             {
               fieldName: "others",
               content: (
-                <Forms.InputGroup labelFor="others" label="Others">
-                  <Forms.Input {...register("others")} />
+                <Forms.InputGroup
+                  labelFor="others"
+                  label="Others"
+                  error={errors.others?.message}
+                >
+                  <Forms.Input
+                    hasError={stepFormHasError}
+                    {...register("others")}
+                  />
                 </Forms.InputGroup>
               ),
             },
