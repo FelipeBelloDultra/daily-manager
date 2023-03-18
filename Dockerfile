@@ -11,5 +11,3 @@ USER node
 EXPOSE 3001
 
 COPY  --chown=node:node . /app/
-
-CMD ["npm", "run", "dev"]

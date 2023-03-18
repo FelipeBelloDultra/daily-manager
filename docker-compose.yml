@@ -9,5 +9,6 @@ services:
       - 3001:3001
     volumes:
       - .:/app
+    command: ["npm", "run", "dev"]
     container_name: daily-manager
     image: daily-manager_image
