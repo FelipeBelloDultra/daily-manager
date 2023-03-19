@@ -2,7 +2,7 @@
 import { Trash } from "react-feather";
 
 // Components
-import { ExpandedPanel } from "~/components";
+import { ExpandedPanel } from "~/components/common";
 
 // Interfaces
 import { IParticipants } from "~/interfaces";

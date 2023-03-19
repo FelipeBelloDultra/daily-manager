@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { IParticipants } from "~/interfaces";
 
 // Components
-import { Forms, Button, Steps } from "~/components";
+import { Forms, Button, Steps } from "~/components/common";
 
 interface IInputFields {
   name: string;
@@ -19,7 +19,7 @@ interface IInputFields {
   others: string;
 }
 
-interface INewParticipantProps {
+interface INewParticipantModalProps {
   onUpdateParticipants: (newParticipant: IParticipants) => void;
   onClose: () => void;
 }
@@ -33,10 +33,10 @@ const schema = yup.object().shape({
   others: yup.string(),
 });
 
-const NewParticipant = ({
+const NewParticipantModal = ({
   onUpdateParticipants,
   onClose,
-}: INewParticipantProps): JSX.Element => {
+}: INewParticipantModalProps): JSX.Element => {
   const {
     register,
     handleSubmit,
@@ -193,4 +193,4 @@ const NewParticipant = ({
   );
 };
 
-export default NewParticipant;
+export default NewParticipantModal;

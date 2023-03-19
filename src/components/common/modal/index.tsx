@@ -5,10 +5,7 @@ import { X } from "react-feather";
 import { IReactNode } from "~/interfaces";
 
 // Components
-import { ReactPortal } from "~/components";
-
-// Child components
-import NewParticipant from "./new-participant";
+import { ReactPortal } from "~/components/common";
 
 interface IModalProps {
   children: IReactNode;
@@ -54,7 +51,5 @@ const Modal = ({
     </ReactPortal>
   );
 };
-
-Modal.NewParticipant = NewParticipant;
 
 export default Modal;

@@ -2,7 +2,11 @@
 import { useCallback, useState } from "react";
 
 // Components
-import { ParticipantItem, Modal, Button } from "~/components";
+import { Modal, Button } from "~/components/common";
+import {
+  ParticipantItem,
+  NewParticipantModal,
+} from "~/components/participants";
 
 // Hooks
 import { useLocalStorage } from "~/hooks/use-local-storage";
@@ -104,7 +108,7 @@ export const App = (): JSX.Element => {
         title="New participant"
         modalName="new-participant-modal"
       >
-        <Modal.NewParticipant
+        <NewParticipantModal
           onClose={() => setShowModal(false)}
           onUpdateParticipants={handleOpenNewParticipantModal}
         />
