@@ -7,6 +7,9 @@ import * as yup from "yup";
 // Intefaces
 import { IParticipants } from "~/interfaces";
 
+// Utils
+import { utils } from "~/utils";
+
 // Components
 import { Forms, Button, Steps } from "~/components/common";
 
@@ -67,7 +70,7 @@ const NewParticipantModal = ({
 
   function handleUpdateParticipants(data: IInputFields) {
     onUpdateParticipants({
-      _id: crypto.randomUUID(),
+      _id: utils.generateRandomId(),
       name: data.name,
       message: {
         doing: data.doing,

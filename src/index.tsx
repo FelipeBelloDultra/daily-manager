@@ -14,8 +14,8 @@ import { useLocalStorage } from "~/hooks/use-local-storage";
 // Intefaces
 import { IParticipants } from "~/interfaces";
 
-// Utils
-import { DownloadFile } from "~/utils/download-file";
+// Services
+import { DownloadFile } from "~/services/download-file-service";
 
 export const App = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
